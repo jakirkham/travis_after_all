@@ -2,6 +2,7 @@ import os
 import json
 import time
 import logging
+from functools import reduce
 
 try:
     import urllib.request as urllib2
