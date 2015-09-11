@@ -3,6 +3,7 @@ import json
 import time
 import logging
 import requests
+from functools import reduce
 
 try:
     import urllib.request as urllib2
@@ -52,7 +53,7 @@ def matrix_snapshot(token):
     :return: Matrix List
     """
     response = urllib2.build_opener().open("https://api.travis-ci.com/builds/{0}?access_token={1}".format(build_id, token)).read()
-    raw_json = json.loads(response)
+    raw_json = json.loads(response.decode('utf-8'))
     matrix_without_leader = [MatrixElement(element) for element in raw_json["matrix"]]
     return matrix_without_leader
 
